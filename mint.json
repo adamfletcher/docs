@@ -45,7 +45,7 @@
         "setup/prerequisites",
         {
                 "group": "AWS Setup",
-                "pages": ["aws-setup", "manual-setup"]
+                "pages": ["setup/aws-setup", "setup/manual-setup"]
             }
       ]
     },
