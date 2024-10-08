@@ -1,0 +1,50 @@
+---
+title: 'Core Concepts'
+description: 'Description of your new file.'
+---
+
+## Projects
+
+A Starsheet project consists of a single Google Sheet document, which is used to generate a blob of JSON, which you can then load dynamically into your application. 
+
+The Google Sheet document can contain multiple worksheets, allowing different types of data to be combined into the output JSON. For example, a Google Sheet containing two worksheets will result in the following structure. 
+
+```json
+{
+  "worksheet_name": [
+    {
+
+    }
+  ],
+  "another_worksheet": [
+    {
+
+    }
+  ]
+}
+```
+
+In your application that consumes the JSON feeds, you may wish to use multiple projects to split your data into logical chunks based on how the data is used and how frequently it is updated.  For example, you may use one Starsheet projects to generate a newsfeed and another for other configuration data, as that allows: 
+
+- One set of data to be updated without having to unecessarily download a large amount of data that hasn't changed. This is particularly recommended for applications that have a small set of data that changes frequently and a larger set of data that changes rarely. 
+- To grant different users with permissions to publish each project
+
+## Environments
+
+Environments allow different versions of content to be available at the same time. Most commonly this is used to have a "live" versionthat is served to end users, and one or more "development" versions allowing changes to be worked on and tested without impacting the live version.
+
+Free plans are limited to two environments (development and live). Paid plans allow the creation of as many environments as needed. For example, you may have:
+
+Each environment can be set to **public** or **private**. Requests to private environments must be signed in order to access to prevent the public from potentially accessing data that you have not intended to make live yet. Environments can be changed between public or private at any time. 
+
+<Warning>Changing an environment from public to private will break existing links so please make sure an application you have distributed to end users is not using an unisgned link to environment before changing it to private.</Warning>
+
+## Content Versions
+
+Each content version represents a revision of the Google Sheet that Starsheet retrieved.
+
+Version numbers will not necessarily be sequential. Google will generate multiple revisions whilst a document is being edited but Starsheet only captures the latest version during each sync to prevent the version history being flooded with extraneous versions.
+
+Every version retrieved by Starsheet is retained allowing you to publish or rollback to any historical version at any point in time.
+
+Whilst applications can point to specific versions of content it is not typically recommended as it prevents remote updates as they will always be locked to that specific version.
