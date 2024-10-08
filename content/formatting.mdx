@@ -1,0 +1,40 @@
+---
+title: 'Formatting Data'
+description: 'Description of your new file.'
+---
+
+## Basic Structure
+
+```json
+{
+  "worksheet_name": [
+
+  ],
+  "another_worksheet": [
+
+  ]
+}
+```
+
+## Naming Conventions
+
+Starsheet does not impose any naming convention for worksheets and fields. The JSON output will mirror the exact names used in the Google Sheet to ensure interoperability with all programming languages and frameworks. 
+
+Whilst you are free to include spaces and a mix of capitalisation in your worksheet and field names, we strongly recommend adopting a consistent naming convention such as `snake_case`, `camelCase` or `PascalCase`. 
+
+<Info>
+In the future, we may introduce a project-level setting to automatically convert spreadsheets to your preferred naming convention. Please contact us if this feature is important to you and you wish to be an early adopter. 
+</Info>
+
+### Reserved Characters
+
+The following symbols are reserved by Startsheet and should not be used in field and/or worksheet names. 
+
+| Symbol | Description       | Restricted in              | Where it's used                                                                                                |
+| ------ | ----------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `#`    | Hash              | Worksheet and Column Names | Used to hide a worksheet or row                                                                                |
+| `.`    | Period            | Column Names               | Used in column titles to define data to be output as a JSON Object                                             |
+| `[]`   | Square Brackets   | Column Names               | Used in column titles to defined fields to be combined into an array                                           |
+| `!`    | Exclamation Mark  | Column Names               | Used to trigger specific functionality such as hiding rows or causing a sheet to be output as key-value pairs. |
+| `?`    | Question Mark     | Column Names               | Reserved for future use                                                                                        |
+| `<>`   | Triangle Brackets | Column Names               | Reserved for future use                                                                                        |

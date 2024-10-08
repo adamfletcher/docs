@@ -22,45 +22,27 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Login",
+    "url": "https://dashboard.starsheet.app"
   },
   "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
+    
   ],
   "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
+    
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "About Starsheet",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "core-concepts"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Project Setup",
       "pages": [
-        "essentials/markdown",
+        "setup/prerequisites",
         "essentials/code",
         "essentials/images",
         "essentials/settings",
@@ -69,23 +51,12 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Managing Content",
       "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "content/formatting"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
   }
 }
