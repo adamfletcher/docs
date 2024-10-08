@@ -33,6 +33,11 @@ Pricing for S3 and Cloudfront is based on the amount of data stored and transfer
   Detailed pricing information can be found on the [AWS Cloudfront](https://aws.amazon.com/cloudfront/pricing/) and [AWS S3](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4) pricing pages. 
 </Accordion>
 
+# Permissions
+
+Our Cloudformation template grants Starsheet with the minimal set of permissions required to function. Access is limited to only the resources that the Cloudformation template creates, and only the minimal set of permissions required is granted. More details on the specific permissions granted is available [here](AWS%20Permissions.md). 
+
+You can verify this manually by viewing the [Cloudfront Template](https://starsheet-cloudformation-templates.s3.amazonaws.com/latest.json) file that Starsheet uses. 
 
 
 
