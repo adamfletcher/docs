@@ -1,0 +1,110 @@
+---
+title: Manual Setup
+description: 'Instructions for configuring AWS resources manually'
+---
+
+import IamPolicy from '/snippets/iam-policy.mdx';
+import S3Permissions from '/snippets/s3-permissions.mdx';
+import CloudfrontPermissions from '/snippets/cloudfront-permissions.mdx';
+
+## Resources Required
+
+Starsheet requires the following AWS resources: 
+
+- A **S3 Bucket**, used to store the data that Starsheet generates for your project
+- A **IAM User** or **IAM Role** to allow Starsheet to authenticate with your AWS account
+
+Additionally the following resources are optional, but strongly recommended: 
+
+- A **Cloudfront Distribution**, which acts as a CDN to deliver content to end users at lower latency than loading from S3 directly
+
+<Accordion title="Benefits of using Cloudfront">
+Using Cloudfront is strongly recommended if serving content directly to apps used by end users. It has the following benefits over loading content from S3: 
+- Reduced download latency by serving content from a data centers geographically close to the user
+- Supports a custom domain name (eg. content.yourdomain.com)
+- Can be configured to automatically compress data to reduce download times (automatically configured when using our [automatic setup](/setup/aws/automatic-setup))
+- AWS provides 1TB of data transfer and 10 million requests free per month
+</Accordion>
+
+
+## Authentication
+
+
+Starsheet supports two methods of authentication against your AWS account:
+
+- **IAM Role**, which is where you are allowing Starsheet's AWS user to assume a role on your account. 
+-  **IAM User**, which is where you setup a user on your AWS account and provide Startsheet with credentials (access key and secret) to access it. 
+
+Both methods are similar, in that you are granting an AWS Identify with specific permissions to act on your account but the setup process is subtly different between the two. 
+
+AWS **recommends using IAM Roles** to grant external access to your AWS account as it avoids the need to generate and share account credentials. 
+
+### Permissions Required
+
+<Note>These instructions are for customers settings up AWS resources manually. If using Starsheet's Cloudformation template, the AWS permissions described below will be configured automatically.</Note>
+
+
+Starsheet requires the following permissions to the S3 bucket specified during the project setup process:
+
+
+<S3Permissions />
+
+Additionally, if using Cloudfront to serve content, the following permissions are required to the Cloudfront Distribution:
+
+
+<CloudfrontPermissions />
+
+
+### IAM Policy Template
+
+The IAP policy template provided below will setup the correct permissions. You must substitute the following strings in the template with the relevant values from your AWS resources.  The [automatic setup process](/setup/aws/automatic-setup) generates the same IAM Policy. 
+
+| String                         | Replace With                                                                                                                  |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `{S3_BUCKET_NAME}`             | The unique name you gave your bucket when it was created (available [here](https://us-east-1.console.aws.amazon.com/s3/home)) |
+| `{CLOUDFRONT_DISTRIBUTION_ID}` | The ID of your Cloudfront Distribution (available [here](https://us-east-1.console.aws.amazon.com/cloudfront/v4/home))        |
+| `{AWS_ACCOUNT_ID}`             | Your AWS account ID (available [here](https://us-east-1.console.aws.amazon.com/billing/home))                                 |
+
+
+
+
+<IamPolicy />
+
+The policy abive assumes you are using a S3 bucket dedicated to Starsheet, and therefore grants permissions over the whole bucket, however you may [limit Starsheet's access to a specific subfolder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-folders) if required.
+
+## IAM Setup Instructions
+
+
+<AccordionGroup>
+
+<Accordion title="Using a IAM Role">
+
+1. Create a new role in the [IAM Console](https://us-east-1.console.aws.amazon.com/iam/home#/roles)
+2. Select a custom trust policy a paste the following config. This allows Starsheet's AWS account to assume the role you are creating. 
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::715841338341:user/starsheet-customer-access"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+  ```
+  3. Attach the IAM Policy Template provided above to the newly created role, making sure to substitute the placeholder values in the template.
+  4. Copy the ARN from the newly created IAM role and enter it into the Starsheet project creation form. Starsheet will validate the credentials work when setting up the project. The ARN will be in the format `arn:aws:iam::000000000000:role/your-role-name`
+</Accordion>
+
+<Accordion title="Using a IAM User">
+
+1. Create a new user using in the [IAM Console](https://us-east-1.console.aws.amazon.com/iam/home#/users). The user does not require AWS Management Console access
+2. Attach the IAM Policy Template provided above to the newly created user, making sure to substitute the placeholder values in the template. 
+3. Generate an access key and secret for the newly created IAM user and enter those credentials into the Starsheet project creation form. Starsheet will validate the credentials work when setting up the project. 
+
+</Accordion>
+
+</AccordionGroup>

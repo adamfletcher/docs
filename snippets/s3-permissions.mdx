@@ -1,0 +1,6 @@
+| Permission        | Why it's needed                                                                                                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `s3:PutObject`    | Used to upload the data generated from your Google Sheet(s) to your S3 bucket                                                                                                         |
+| `s3:DeleteObject` | Used to delete an item from S3 when you perform an action in Startsheet to initiate a deletion (such as deleting an environment). Starsheet never delete data unless you initiate it. |
+| `s3:PutObjectAcl` | Used to set permissions on an item to make them publicly available or private.                                                                                                        |
+| `s3:GetObject`    | Used to copy a content version to an environment when publishing to an environment                                                                                                    |

@@ -1,43 +1,16 @@
 ---
 title: 'Introduction'
-description: 'Description of your new file.'
 ---
 
-Starsheet provides a Cloudformation template, which will automatically create the necessary resources on your AWS account in just a few clicks. 
 
-- 1x **S3 Bucket**, used to store the data that Starsheet generates for your project
-- 1x **Cloudfront Distribution**, which acts as a CDN to deliver content to end users at lower latency than loading from S3 directly
-- 1x **IAM Role**, used by Starsheet to access the above resources. 
-
-## Cost
-
-None of the resources provisioned by Starsheet incur a setup or ongoing hourly/monthly charge. 
-
-Pricing for S3 and Cloudfront is based on the amount of data stored and transferred. Most Starsheet customers will incur very little (less than a few dollars a month) or no AWS costs at all due to free usage tiers provided by AWS. 
-
-<Tip>Please note that free usage tiers is shared across your whole AWS account so other applications on your AWS account may already be consuming your free usage allowance. </Tip>
-
-<Accordion title="Additional AWS pricing information">
-  **Free Usage**
-
-  - Cloudfront: 1TB data transfer and 10 million requests per month is free of charge
-  - S3: 5GB of free storage for 12 months from account creation 
-
-  **Additional Usage Fees**
-
-  - Cloudfront: \$0.085-\$0.120 per GB transfered, plus \$0.0075-$0.0160 per 10,000 requests (price varies per region)
-  - S3: Less than $0.03 per GB stored per month. 
-  
-  Typical Startsheet usage will result in less than 1GB being stored on S3. Data transfer varies depending on the popularity of the application and size of data and images. 
-
-  Detailed pricing information can be found on the [AWS Cloudfront](https://aws.amazon.com/cloudfront/pricing/) and [AWS S3](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4) pricing pages. 
-</Accordion>
-
-# Permissions
-
-Our Cloudformation template grants Starsheet with the minimal set of permissions required to function. Access is limited to only the resources that the Cloudformation template creates, and only the minimal set of permissions required is granted. More details on the specific permissions granted is available [here](AWS%20Permissions.md). 
-
-You can verify this manually by viewing the [Cloudfront Template](https://starsheet-cloudformation-templates.s3.amazonaws.com/latest.json) file that Starsheet uses. 
+<Steps>
+  <Step title="Select a Google Sheet">
+    View an overview of the  [basic structure](/content/basic-structure) for a Spreadsheet, or use our starter template. 
+  </Step>
+  <Step title="Connect to an AWS Account">
+	  Starsheet requires a AWS account to publish to. [Read more](/setup/aws/aws-setup)
+  </Step>
+</Steps>
 
 
 

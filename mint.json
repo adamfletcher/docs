@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/logo_dark.svg",
+    "light": "/logo/logo.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -17,12 +17,12 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Home",
+      "url": "https://starsheet.app"
     }
   ],
   "topbarCtaButton": {
-    "name": "Login",
+    "name": "Dashboard",
     "url": "https://dashboard.starsheet.app"
   },
   "tabs": [
@@ -36,25 +36,41 @@
       "group": "About Starsheet",
       "pages": [
         "introduction",
+        "use-cases",
         "core-concepts"
       ]
     },
     {
       "group": "Project Setup",
       "pages": [
-        "setup/prerequisites",
+        "setup/introduction",
         {
-                "group": "AWS Setup",
-                "pages": ["setup/automatic-setup", "setup/manual-setup"]
-            }
+          "group": "AWS Setup",
+          "pages": [
+            "setup/aws/aws-setup",
+            "setup/aws/automatic-setup",
+            "setup/aws/manual-setup"
+          ]
+        }
+        
       ]
     },
     {
       "group": "Managing Content",
       "pages": [
+        "content/basic-structure",
         "content/formatting"
       ]
+    },
+    {
+      "group": "Advanced Topics",
+      "pages": [
+        "advanced/images",
+        "advanced/storage",
+        "advanced/custom-domain"
+      ]
     }
+    
   ],
   "footerSocials": {
   }

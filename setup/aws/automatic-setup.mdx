@@ -1,0 +1,94 @@
+---
+title: Automatic Setup
+description: Setting up a project using Starsheet's Cloudformation to setup resources automatically on AWS
+---
+
+import S3Permissions from '/snippets/s3-permissions.mdx';
+import CloudfrontPermissions from '/snippets/cloudfront-permissions.mdx';
+
+Starsheet provides a template to automatically create the necessary resources on your AWS account in just a few clicks. It uses [Cloudformation](https://aws.amazon.com/cloudformation/), which is an AWS service to create a "stack" of resources based on a template. 
+
+If you choose the automated setup, you will be directed to AWS during when setting up your project. Once the Cloudformation stack has been deployed on AWS you should return to the setup page to complete setting up your Starsheet project. 
+
+## Permissions
+
+Our Cloudformation template grants Starsheet with the minimal set of permissions required to function. Access is limited to only the resources that the Cloudformation template creates, and only the minimal set of permissions required is granted.
+
+
+
+<Accordion title="Details of IAM Permissions Granted">
+
+The following permissions are granted to **only the specific S3 bucket and Cloudfront distribution** created by the template.
+
+**S3**
+<S3Permissions />
+
+**Cloudfront**
+<CloudfrontPermissions />
+
+You can verify this manually by viewing the [Cloudfront Template](https://starsheet-cloudformation-templates.s3.amazonaws.com/latest.json) file that Starsheet uses. 
+
+</Accordion>
+
+
+
+
+## Setup Instructions
+
+After selecting your Google Sheet, select 'Automatic AWS Setup' and follow these steps: 
+
+<Steps>
+  <Step title="Click the 'Deploy Starsheet Stack to AWS'">
+	    This will direct you to AWS. Create a new account if you do not already have one or log in to an existing account. 
+    <Frame>
+        <img
+        src="/images/setup/automatic_setup_step_1.png"
+        />
+    </Frame>
+  </Step>
+  <Step title="Give your stack a name">
+	 The name will be used in the resource created. For example the S3 bucket created will 
+     use the format ``starsheet-{YOUR_STACK_NAME}-{GENERATED_UNIQUE_ID}``. 
+     
+     <Info>The generated unique ID is added to prevent clashes because S3 bucket names must be globally unique across all AWS customers. </Info>
+    <Frame>
+        <img
+        src="/images/setup/automatic_setup_step_2.png"
+        />
+    </Frame>
+  </Step>
+  <Step title="Acknowledge that you understand the stack will create an IAM Role">
+    <Frame>
+        <img
+        src="/images/setup/automatic_setup_step_3.png"
+        />
+    </Frame>
+  </Step>
+  <Step title="Click 'Create Stack' to begin creating the AWS resources">
+    <Frame>
+        <img
+        src="/images/setup/automatic_setup_step_4.png"
+        />
+    </Frame>
+    The deployment will take a few minutes to complete. 
+  </Step>
+    <Step title="Once the status changes to CREATE_COMPLETE click on the 'Outputs' tab ">
+    <Frame>
+        <img
+        src="/images/setup/automatic_setup_step_5.png"
+        />
+    </Frame>
+  </Step>
+    <Step title="Copy the values form the outputs tab to the relevant fields in the project creation form">
+    <Frame>
+        <img
+        src="/images/setup/automatic_setup_step_6.png"
+        />
+    </Frame>
+    Once you have copied all 4 values. Click on the 'Create Project' button to finish the setup process.  
+  </Step>
+</Steps>
+
+
+
+

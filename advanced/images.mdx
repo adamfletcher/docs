@@ -1,0 +1,61 @@
+---
+title: 'Image Uploads'
+description: 'Description of your new file.'
+---
+
+<Warning>Image Uploads are only available on the Teams plan.</Warning>
+
+Images contained within cells within your Google Sheet will have the following impact on the output: 
+
+- An additional `$images` object at the root of the JSON document which contains a manifest of all images indexed by filename,  containing:
+	- `url` (relative to the URL of the JSON document that was requested)
+	- `size_bytes`
+	- `mime_type`
+- The field containing the image will be output as a JSON object with the keys:
+	- `$type` which will always be set to `image`
+	- `filename` which is a reference to the key in the root `$images` object
+
+The filename is a hash of the image contents so if multiple copies of the same image are contained within the source image they will share the same hash/filename and will result in one entry in the `$images` object. 
+
+```json
+{
+  "worksheet_name": [
+	  {
+		  "another_field": "Foo",
+		  "name_of_field_containing_image": {
+			"$type": "image",
+			"filename": "73df8307cc077e05fa9935a4d5a53c53.png"
+		  }
+	  },
+	  {
+		  "another_field": "Foo",
+		  "name_of_field_containing_image": {
+			"$type": "image",
+			"filename": "73df8307cc077e05fa9935a4d5a53c53.png"
+		  }
+	  }
+  ],
+  "$images": {
+    "faf2d6cc94c60397169d406804e0f2cd.png": {
+      "url": "/images/faf2d6cc94c60397169d406804e0f2cd.png",
+      "size_bytes": 1591,
+      "content_type": "image/png"
+    },
+    "73df8307cc077e05fa9935a4d5a53c53.png": {
+      "url": "/images/73df8307cc077e05fa9935a4d5a53c53.png",
+      "size_bytes": 1620,
+      "content_type": "image/png"
+    },
+    "69ca799d32aaccbe0b8cbd2cc5d57847.png": {
+      "url": "/images/69ca799d32aaccbe0b8cbd2cc5d57847.png",
+      "size_bytes": 1625,
+      "content_type": "image/png"
+    },
+    "cb18ad5b0cb7d9f88e1b9e126565df4a.png": {
+      "url": "/images/cb18ad5b0cb7d9f88e1b9e126565df4a.png",
+      "size_bytes": 1982,
+      "content_type": "image/png"
+    }
+  }
+}
+```

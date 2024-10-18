@@ -1,0 +1,109 @@
+---
+title: 'Basic Structure'
+---
+
+Starsheet does not impose strict structure requirements for your spreadsheet. The only requirement is that Starsheet assumes your data has a single heading row which will be used for the JSON keys. 
+
+## Basic Structure
+
+By default, each worksheet from your spreadsheet will be output as an array of JSON objects, with each object representing a row in that spreadsheet. For example:
+
+```json
+{
+  "worksheet_name": [
+	  {
+		  "your_column_name": "Foo"
+	  },
+	  {
+		  "your_column_name": "Bar"
+	  }
+  ],
+  "another_worksheet": [
+	...
+  ]
+}
+```
+
+## Google Sheet Features
+
+### <Icon icon="check" iconType="solid" /> Supported Features
+The following Google Sheet features are known to work with Starsheet. Most will have no impact on the output data, but editor-facing features like Data Validation and Conditional Formatting can be used to create a robust editing experience that minimises bugs caused by data issues. 
+
+| Feature                                                                                                                                       | Comment                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Formulas                                                                                                                                      | JSON Output will contain the value outputted by the formula as displayed in Google Sheets |
+| [Tables](https://workspaceupdates.googleblog.com/2024/05/tables-in-google-sheets.html)                                                        |                                                                                           |
+| Drop Downs                                                                                                                                    |                                                                                           |
+| Tickboxes                                                                                                                                     |                                                                                           |
+| Data Validation                                                                                                                               |                                                                                           |
+| Conditional Formatting                                                                                                                        |                                                                                           |
+| [Protected Sheets/Ranges](https://support.google.com/docs/answer/1218656?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cprotect-a-range-or-sheet) |                                                                                           |
+
+
+### <Icon icon="triangle-exclamation" iconType="solid" /> Unsupported Features
+
+| Feature             | Comment                                                                                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text Formatting     | Text formatting such as bold, italic, font colours and background colours will be ignored                                                                     |
+| Hidden Rows/Columns | Data from hidden ranges will be included in the output. [See instructions on how to hide data in Starsheet](/content/formatting#hiding-worksheets-or-columns) |
+| Filters             | Filters will be ignored. Data hidden by filters will still appear in the output                                                                               |
+
+## Naming Conventions
+
+Starsheet does not impose any naming convention for worksheets and fields. The JSON output will mirror the exact names used in the Google Sheet to ensure interoperability with all programming languages and frameworks. 
+
+Whilst you are free to include spaces and a mix of capitalisation in your worksheet and field names, we strongly recommend adopting a consistent naming convention such as `snake_case`, `camelCase` or `PascalCase`. 
+
+<Info>
+In the future, we may introduce a project-level setting to automatically convert spreadsheets to your preferred naming convention. Please contact us if this feature is important to you and you wish to be an early adopter. 
+</Info>
+
+### Special/Reserved Characters
+
+The following symbols are used by Starsheet to trigger specific behaviours so should not be used in field and/or worksheet names unless you are looking to trigger the functionality described. 
+
+| Symbol | Description       | Scope                      | How it's used                                                                                                                                                                                                      |
+| ------ | ----------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `#`    | Hash              | Worksheet and Column Names | Used to [hide a worksheet or row](/content/formatting#hiding-worksheets-or-columns).                                                                                                                               |
+| `$`    | Dollar Sign       | Worksheet Names            |                                                                                                                                                                                                                    |
+| `.`    | Period            | Column Names               | Used in column titles to define data to be [output as a JSON Object](/content/formatting#objects).                                                                                                                 |
+| `[]`   | Square Brackets   | Column Names               | Used in column titles to defined fields to be combined into an [array](/content/formatting#arrays),                                                                                                                |
+| `!`    | Exclamation Mark  | Column Names               | Used to trigger specific functionality such as [hiding rows](/content/formatting#hiding-rows) or causing a sheet to be output as [key-value pairs](/content/formatting#outputting-a-worksheet-as-key-value-pairs). |
+| `:`    | Colon             | Column Names               | Reserved for future use                                                                                                                                                                                            |
+| `?`    | Question Mark     | Column Names               | Reserved for future use                                                                                                                                                                                            |
+| `<>`   | Triangle Brackets | Column Names               | Reserved for future use                                                                                                                                                                                            |
+
+
+## Advanced Formatting 
+
+<CardGroup cols={2}>
+  <Card
+    title="Combining columns into an array"
+    icon="brackets-square"
+    horizontal="true"
+    href="/content/formatting#arrays"
+  >
+  </Card>
+     <Card
+    title="Combining columns into an object"
+    icon="brackets-curly"
+    horizontal="true"
+    href="/content/formatting#objects"
+  >
+  </Card>
+  <Card
+    title="Hiding sheets, columns or rows"
+    icon="eye-slash"
+    horizontal="true"
+    href="/content/formatting#excluding-data-from-output"
+  >
+  </Card>
+
+     <Card
+    title="Modifying data structure"
+    icon="gear"
+    horizontal="true"
+    href="/content/formatting#modifying-json-document-format"
+  >
+  </Card>
+</CardGroup>

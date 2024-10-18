@@ -1,17 +1,32 @@
 ---
-title: 'AWS Setup'
-description: 'Description of your new file.'
+title: 'AWS Overview'
 ---
 
-Starsheet provides a Cloudformation template, which will automatically create the necessary resources on your AWS account in just a few clicks. 
+Starsheet publishes content to resources on your AWS account. At a minimum Starsheet requires access to a **S3 Bucket**, but we also recommend using **Cloudfront** to distribute content to end uses. 
 
-- 1x **S3 Bucket**, used to store the data that Starsheet generates for your project
-- 1x **Cloudfront Distribution**, which acts as a CDN to deliver content to end users at lower latency than loading from S3 directly
-- 1x **IAM Role**, used by Starsheet to access the above resources. 
+Startsheet can setup everything on your AWS account automatically in just a few clicks. We recommend this approach to ensure that everything is configured correctly, but if you prefer we also provide instructions on how to set things up manually yourself. 
+
+<CardGroup cols={2}>
+  <Card
+    title="Automatic Setup (Recommended)"
+    icon="bolt"
+    href="/setup/aws/automatic-setup"
+  >
+    Use our Cloudformation template to setup AWS resources automatically. 
+  </Card>
+  <Card
+    title="Manual Setup"
+    icon="wrench"
+    href="/setup/aws/manual-setup"
+  >
+    How to setup AWS resources manually. 
+  </Card>
+</CardGroup>
+
 
 ## Cost
 
-None of the resources provisioned by Starsheet incur a setup or ongoing hourly/monthly charge. 
+None of the resources used by Starsheet incur a setup or ongoing hourly/monthly charge. 
 
 Pricing for S3 and Cloudfront is based on the amount of data stored and transferred. Most Starsheet customers will incur very little (less than a few dollars a month) or no AWS costs at all due to free usage tiers provided by AWS. 
 
@@ -33,11 +48,7 @@ Pricing for S3 and Cloudfront is based on the amount of data stored and transfer
   Detailed pricing information can be found on the [AWS Cloudfront](https://aws.amazon.com/cloudfront/pricing/) and [AWS S3](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4) pricing pages. 
 </Accordion>
 
-# Permissions
 
-Our Cloudformation template grants Starsheet with the minimal set of permissions required to function. Access is limited to only the resources that the Cloudformation template creates, and only the minimal set of permissions required is granted. More details on the specific permissions granted is available [here](AWS%20Permissions.md). 
-
-You can verify this manually by viewing the [Cloudfront Template](https://starsheet-cloudformation-templates.s3.amazonaws.com/latest.json) file that Starsheet uses. 
 
 
 
